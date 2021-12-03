@@ -7,7 +7,7 @@ pub fn move_sub(moves: Vec<(String, i32)>) -> i32 {
 
 fn sum_for_move(moves: &Vec<(String, i32)>, target: &str) -> i32 {
     moves
-        .into_iter()
+        .iter()
         .filter(|(s, _m)| s.contains(target))
         .map(|(_s, m)| m)
         .sum()

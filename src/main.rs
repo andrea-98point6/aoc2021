@@ -43,6 +43,7 @@ fn main() {
     let input3: Vec<String> = read_lines_into("./files/day3.txt".to_string(), |number| number);
 
     println!("day3.0 {:?}", day3::get_consumption(input3.clone()));
+    println!("day3. {:?}", day3::get_live(input3.clone()));
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
