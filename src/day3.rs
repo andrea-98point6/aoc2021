@@ -32,6 +32,9 @@ pub fn get_consumption(input: Vec<String>) -> i32 {
             });
     epsi * gamma
 }
+
+// appreciate this code is not great as there is a lot of repetition, but my kid is sick and this is Xmas...
+// and this is not going to go to production any time soon so... yeah
 pub fn get_oxigen(input: Vec<String>, relevant_bit: usize) -> String {
     let zero_counts = input
         .clone()
