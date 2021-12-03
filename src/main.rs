@@ -2,10 +2,12 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 pub mod day1;
-pub mod day1_input;
+// pub mod day1_input;
 
 pub mod day2;
-pub mod day2_input;
+// pub mod day2_input;
+
+pub mod day3;
 
 fn main() {
     // println!("day1.0 {:?}", day1::stepper(day1_input::get_input()));
@@ -37,6 +39,10 @@ fn main() {
 
     println!("day2.0 {:?}", day2::move_sub(input2.clone()));
     println!("day2.1 {:?}", day2::move_sub_better(input2));
+
+    let input3: Vec<String> = read_lines_into("./files/day3.txt".to_string(), |number| number);
+
+    println!("day3.0 {:?}", day3::get_consumption(input3.clone()));
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
