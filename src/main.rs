@@ -9,4 +9,5 @@ fn main() {
     println!("day1.1 {:?}", day1::stepper_window(day1_input::get_input()));
 
     println!("day2.0 {:?}", day2::move_sub(day2_input::get_input()));
+    println!("day2.0 {:?}", day2::move_sub_better(day2_input::get_input()));
 }
