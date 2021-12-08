@@ -56,7 +56,6 @@ pub fn get_oxigen(input: Vec<String>, relevant_bit: usize) -> String {
     get_oxigen(still_in, relevant_bit + 1)
 }
 
-
 pub fn get_scrub(input: Vec<String>, relevant_bit: usize) -> String {
     let zero_counts = input
         .clone()
@@ -79,27 +78,33 @@ pub fn get_scrub(input: Vec<String>, relevant_bit: usize) -> String {
 }
 
 pub fn get_live(input: Vec<String>) -> i32 {
-    let oxigen = get_oxigen(input.clone(), 0).chars().rev().fold((0,0), |(coll,pow_2), n| {
-        if n == '1' {
-            let base: i32 = 2;
-            (coll + base.pow(pow_2), pow_2 +1 )
+    let oxigen = get_oxigen(input.clone(), 0)
+        .chars()
+        .rev()
+        .fold((0, 0), |(coll, pow_2), n| {
+            if n == '1' {
+                let base: i32 = 2;
+                (coll + base.pow(pow_2), pow_2 + 1)
+            } else {
+                (coll, pow_2 + 1)
+            }
+        })
+        .0;
 
-        } else {
-            (coll, pow_2 +1 )
-        }
-    }).0;
+    let scrub = get_scrub(input.clone(), 0)
+        .chars()
+        .rev()
+        .fold((0, 0), |(coll, pow_2), n| {
+            if n == '1' {
+                let base: i32 = 2;
+                (coll + base.pow(pow_2), pow_2 + 1)
+            } else {
+                (coll, pow_2 + 1)
+            }
+        })
+        .0;
 
-    let scrub = get_scrub(input.clone(), 0).chars().rev().fold((0,0), |(coll,pow_2), n| {
-        if n == '1' {
-            let base: i32 = 2;
-            (coll + base.pow(pow_2), pow_2 +1 )
-
-        } else {
-            (coll, pow_2 +1 )
-        }
-    }).0;
-
-    scrub * oxigen 
+    scrub * oxigen
 }
 
 #[test]
