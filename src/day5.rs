@@ -6,7 +6,7 @@ use std::collections::HashMap;
 //when done need to traverse all keys and cound where i32 >=2
 
 pub struct Board {
-    pub state: HashMap<String,i32>,
+    pub state: HashMap<String, i32>,
 }
 
 impl Board {
@@ -20,11 +20,15 @@ impl Board {
         if x_start == x_end {
             let start = std::cmp::min(y_end, y_start);
             let end = std::cmp::max(y_end, y_start);
-            (start..=end).into_iter().for_each(|y| self.mark_this_point(x_start, y));
+            (start..=end)
+                .into_iter()
+                .for_each(|y| self.mark_this_point(x_start, y));
         } else if y_start == y_end {
             let start = std::cmp::min(x_end, x_start);
             let end = std::cmp::max(x_start, x_end);
-            (start..=end).into_iter().for_each(|x| self.mark_this_point(x, y_start))
+            (start..=end)
+                .into_iter()
+                .for_each(|x| self.mark_this_point(x, y_start))
         } else {
             // panic!("something is wrong with input found {}, {}, {}, {}", x_start, y_start, x_end, y_end);
         }
@@ -36,9 +40,13 @@ impl Board {
         let x_min = std::cmp::min(x_end, x_start);
         let x_max = std::cmp::max(x_start, x_end);
         if x_start == x_end {
-            (y_min..=y_max).into_iter().for_each(|y| self.mark_this_point(x_start, y));
+            (y_min..=y_max)
+                .into_iter()
+                .for_each(|y| self.mark_this_point(x_start, y));
         } else if y_start == y_end {
-            (x_min..=x_max).into_iter().for_each(|x| self.mark_this_point(x, y_start))
+            (x_min..=x_max)
+                .into_iter()
+                .for_each(|x| self.mark_this_point(x, y_start))
         } else {
             let mut y_increments = 1;
             if y_end < y_start {
@@ -63,8 +71,8 @@ impl Board {
     fn mark_this_point(&mut self, x: i32, y: i32) {
         let key = Board::coordinate_to_string(x, y);
         if self.state.contains_key(&key) {
-            self.state.insert(key.clone(), self.state[&key] +1);
-        } else  {
+            self.state.insert(key.clone(), self.state[&key] + 1);
+        } else {
             self.state.insert(key, 1);
         }
     }
@@ -77,14 +85,12 @@ impl Board {
         let mut c = 0;
         for (_, value) in self.state {
             if value > 1 {
-                c +=1;
+                c += 1;
             }
         }
         c
     }
-
 }
-
 
 #[test]
 fn test1() {
@@ -98,47 +104,45 @@ fn test1() {
 #[test]
 fn test2() {
     let mut sut = Board::new();
-    sut.mark_this_route(3,3,3,3);
+    sut.mark_this_route(3, 3, 3, 3);
     sut.mark_this_route(3, 3, 3, 0);
     assert_eq!(sut.state["3_3"], 2);
-    assert_eq!(sut.state["3_2"],1);
-    assert_eq!(sut.state["3_1"],1);
-    assert_eq!(sut.state["3_0"],1);
+    assert_eq!(sut.state["3_2"], 1);
+    assert_eq!(sut.state["3_1"], 1);
+    assert_eq!(sut.state["3_0"], 1);
     assert_eq!(sut.state.keys().len(), 4);
 }
 
 #[test]
 fn test3() {
     let mut sut = Board::new();
-    sut.mark_this_route(0,9,5,9);
-    sut.mark_this_route(8,0,0,8);
-    sut.mark_this_route(9,4,3,4);
-    sut.mark_this_route(2,2,2,1);
-    sut.mark_this_route(7,0,7,4);
-    sut.mark_this_route(6,4,2,0);
-    sut.mark_this_route(0,9,2,9);
-    sut.mark_this_route(3,4,1,4);
-    sut.mark_this_route(0,0,8,8);
-    sut.mark_this_route(5,5,8,2);
+    sut.mark_this_route(0, 9, 5, 9);
+    sut.mark_this_route(8, 0, 0, 8);
+    sut.mark_this_route(9, 4, 3, 4);
+    sut.mark_this_route(2, 2, 2, 1);
+    sut.mark_this_route(7, 0, 7, 4);
+    sut.mark_this_route(6, 4, 2, 0);
+    sut.mark_this_route(0, 9, 2, 9);
+    sut.mark_this_route(3, 4, 1, 4);
+    sut.mark_this_route(0, 0, 8, 8);
+    sut.mark_this_route(5, 5, 8, 2);
     let output = sut.count();
     assert_eq!(output, 5);
-
 }
 
 #[test]
 fn test4() {
     let mut sut = Board::new();
-    sut.mark_this_route_diag(0,9,5,9);
-    sut.mark_this_route_diag(8,0,0,8);
-    sut.mark_this_route_diag(9,4,3,4);
-    sut.mark_this_route_diag(2,2,2,1);
-    sut.mark_this_route_diag(7,0,7,4);
-    sut.mark_this_route_diag(6,4,2,0);
-    sut.mark_this_route_diag(0,9,2,9);
-    sut.mark_this_route_diag(3,4,1,4);
-    sut.mark_this_route_diag(0,0,8,8);
-    sut.mark_this_route_diag(5,5,8,2);
+    sut.mark_this_route_diag(0, 9, 5, 9);
+    sut.mark_this_route_diag(8, 0, 0, 8);
+    sut.mark_this_route_diag(9, 4, 3, 4);
+    sut.mark_this_route_diag(2, 2, 2, 1);
+    sut.mark_this_route_diag(7, 0, 7, 4);
+    sut.mark_this_route_diag(6, 4, 2, 0);
+    sut.mark_this_route_diag(0, 9, 2, 9);
+    sut.mark_this_route_diag(3, 4, 1, 4);
+    sut.mark_this_route_diag(0, 0, 8, 8);
+    sut.mark_this_route_diag(5, 5, 8, 2);
     let output = sut.count();
     assert_eq!(output, 12);
-
 }

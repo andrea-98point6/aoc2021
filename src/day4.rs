@@ -32,18 +32,18 @@ pub fn call_number(mut numbers: Vec<i32>, called: i32) -> (Option<i32>, Vec<i32>
         }
     }
 
-    let hor_win = vec![0,5,10,15,20].iter().any(|start| {
+    let hor_win = vec![0, 5, 10, 15, 20].iter().any(|start| {
         for i in 0..5 {
             if numbers[start + i] != -1 {
                 return false;
             };
-        };
+        }
         return true;
     });
 
-    let ver_win = vec![0,1,2,3,4].iter().any(|start| {
+    let ver_win = vec![0, 1, 2, 3, 4].iter().any(|start| {
         for i in 0..5 {
-            if numbers[start + i *5] != -1 {
+            if numbers[start + i * 5] != -1 {
                 return false;
             }
         }
@@ -51,7 +51,10 @@ pub fn call_number(mut numbers: Vec<i32>, called: i32) -> (Option<i32>, Vec<i32>
     });
 
     if ver_win || hor_win {
-       (Some(calculate_win(numbers.clone(), called)), numbers.clone())
+        (
+            Some(calculate_win(numbers.clone(), called)),
+            numbers.clone(),
+        )
     } else {
         (None, numbers.clone())
     }
@@ -111,9 +114,9 @@ fn test3() {
     let numbers = vec![
         14, 21, 17, 24, 4, 10, 16, 15, 9, 19, 18, 8, 23, 26, 20, 22, 11, 13, 6, 5, 2, 0, 12, 3, 7,
     ];
-    let more_numbers = vec!{
-        14, 21, 17, 24, 4, 10, 16, 15, 9, 19, 18, 8, 23, 26, 20, 22, 11, 13, 6, 5, 2, 0, 12, 3, 7, 
-    };
+    let more_numbers = vec![
+        14, 21, 17, 24, 4, 10, 16, 15, 9, 19, 18, 8, 23, 26, 20, 22, 11, 13, 6, 5, 2, 0, 12, 3, 7,
+    ];
 
     let called = vec![
         7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3,
